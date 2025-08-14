@@ -1,0 +1,82 @@
+/* General page adjustments */
+body {
+    background-color: #f8f9fa;
+}
+
+/* Task container */
+.task-box {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    max-width: 900px;
+    margin: 30px auto;
+}
+
+/* Add Task Form */
+.task-form input[type="text"] {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    padding: 8px 12px;
+}
+
+.task-form input[type="text"]:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 4px rgba(13,110,253,0.4);
+}
+
+/* Table adjustments */
+.table th {
+    font-weight: 600;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* Buttons hover effects */
+.btn-primary:hover {
+    background-color: #0b5ed7;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-warning:hover {
+    background-color: #ffca2c;
+}
+
+.btn-danger:hover {
+    background-color: #bb2d3b;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* Flash message spacing (from base.html) */
+.alert {
+    margin-bottom: 15px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 576px) {
+    .task-box {
+        padding: 15px;
+    }
+    .task-form {
+        flex-direction: column;
+    }
+    .task-form input[type="text"] {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    .task-form button {
+        width: 100%;
+    }
+}
+
+
+

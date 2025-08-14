@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Tasks{% endblock %}
+
+{% block content %}
+<div class="task-box">
+
+    <!-- Add Task Form -->
+    <form method="POST" action="{{ url_for('tasks.add_task') }}" class="task-form mb-4 d-flex">
+        <input type="text" name="task_name" class="form-control me-2" placeholder="Enter task title" required>
+        <button type="submit" class="btn btn-primary">Add Task</button>
+    </form>
+
+    <!-- Task Table -->
+    <table class="table table-bordered table-hover align-middle text-center">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Task</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td class="text-start">{{ task.task_name }}</td>
+                <td>
+                    <form action="{{ url_for('tasks.update_status', task_id=task.id) }}" method="post"
+                        style="display:inline;">
+                        {% if task.status == 'Pending' %}
+                        <button type="submit" class="btn btn-sm btn-warning">Pending</button>
+                        {% elif task.status == 'Working' %}
+                        <button type="submit" class="btn btn-sm btn-info">Working</button>
+                        {% elif task.status == 'Done' %}
+                        <button type="submit" class="btn btn-sm btn-success">Done</button>
+                        {% endif %}
+                    </form>
+                </td>
+
+                <td>
+                    <form action="{{ url_for('tasks.edit_task', task_id=task.id) }}" method="GET" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-secondary">Edit</button>
+                    </form>
+
+                    <form action="{{ url_for('tasks.toggle_status', task_id=task.id) }}" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-warning">Next</button>
+                    </form>
+
+                    <form action="{{ url_for('tasks.delete_task', task_id=task.id) }}" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" class="text-muted">No tasks available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Clear All Button -->
+    {% if tasks %}
+    <form action="{{ url_for('tasks.clear_task') }}" method="POST" class="text-end mt-3">
+        <button type="submit" class="btn btn-outline-danger">Clear All</button>
+    </form>
+    {% endif %}
+
+</div>
+{% endblock %}
